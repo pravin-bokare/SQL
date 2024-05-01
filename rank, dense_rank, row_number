@@ -1,0 +1,22 @@
+############################################### Rank ##################################################
+
+select *, rank() over(order by sales desc) from Sales
+
+myWindow = Window.oederBy(desc("sales"))
+df = df.withColumn("rank", rank().over(myWindow))
+
+
+############################################### Dense Rank ##################################################
+
+select *, dense_rank() over(order by sales desc) from Sales
+
+myWindow = Window.oederBy(desc("sales"))
+df = df.withColumn("rank", dense_rank().over(myWindow))
+
+
+############################################### Row Number ##################################################
+
+select *, row_number() over(order by sales desc) from Sales
+
+myWindow = Window.oederBy(desc("sales"))
+df = df.withColumn("rank", row_number().over(myWindow))
