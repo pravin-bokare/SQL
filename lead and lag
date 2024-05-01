@@ -1,0 +1,1 @@
+select *, datediff(second, timing, lead(timing) over(partition by train_no order by timing)) from table
