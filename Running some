@@ -1,0 +1,8 @@
+############################################## Running Sum ############################################
+
+select *,  sum(sales) over(order by date rows betweeen unbounded preceding and current row) from sales
+
+
+############################################# Running Sum with Partition############################################
+
+select *, sum(sales) over(partition by state order by date rows between unbounded preceding and current row) from sales
