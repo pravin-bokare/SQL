@@ -2,7 +2,13 @@
 
 select *,  sum(sales) over(order by date rows betweeen unbounded preceding and current row) from sales
 
+runnning_sum = Window.orderBy("date").rowsBetween(Window.unboundedPreceeding, Window.currentRow)
+df = df.withColumn("Running Sum", sum("sales").over(running_sum))
+
 
 ############################################# Running Sum with Partition############################################
 
 select *, sum(sales) over(partition by state order by date rows between unbounded preceding and current row) from sales
+
+running_sum = Window.partitionBy("state").orderBy("date").rowsBetween(Window.unboundedPreceeding, Window.currentRow)
+df = df.withColumn("Running Sum", sum("sales").over(running_sum))
